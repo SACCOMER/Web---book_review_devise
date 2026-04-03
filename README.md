@@ -1,4 +1,4 @@
-# Book Review Application (phase 1)
+# Book Review Application (phase 2)
 
 ## Project Overview
 
@@ -52,6 +52,9 @@ The application implements multiple types of relationships:
 
 - Many-to-Many:
     - Book & Category (through Categorization)
+## ER Diagram
+
+![ER Diagram](app/assets/images/ER.png)
 
 ---
 
@@ -80,13 +83,64 @@ The application includes realistic seed data:
 - Sample user account
 
 ---
+## API Endpoints
 
-## Test Account
+This project also includes a JSON-based API for user authentication and book data retrieval.
 
-You can use the following account to test the application: 
+### 1. User Signup
 
-- Username: test
-- Password: 123456
+**Endpoint:** `POST /api/signup`
+
+**Description:**  
+Create a new user account.
+
+**Request Body:**
+```json
+{
+  "username": "alice",
+  "email": "alice@example.com",
+  "password": "123456",
+  "password_confirmation": "123456"
+}
+```
+
+### 2. User Login
+
+**Endpoint:** `POST /api/login`
+
+**Description:**
+Log in with an existing user account.
+
+**Request Body:**
+```json
+{
+"email": "alice@example.com",
+"password": "123456"
+}
+```
+
+### 3. Get All Books
+
+**Endpoint:** `GET /api/books`
+
+**Description:**
+Return a list of all books with their categories.
+
+### 4. Get Book Details
+
+**Endpoint:** `GET /api/books/:id`
+
+**Description:**
+Return detailed information for one book, including categories and reviews.
+
+**Example:** `GET /api/books/1`
+
+### 5. Get Categories
+
+**Endpoint:** `GET /api/categories`
+
+**Description:**
+Return a list of all categories.
 
 ---
 
