@@ -4,7 +4,12 @@ Book.destroy_all
 Category.destroy_all
 User.destroy_all
 
-user = User.create(username: "test", password: "123456")
+User.create!(
+  username: "test",
+  email: "test@example.com",
+  password: "123456",
+  password_confirmation: "123456"
+)
 
 fantasy = Category.create(name: "Fantasy")
 scifi = Category.create(name: "Sci-Fi")

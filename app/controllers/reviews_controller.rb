@@ -1,10 +1,5 @@
 class ReviewsController < ApplicationController
-  before_action :require_login, only: [:new, :create]
-  def require_login
-    unless current_user
-      redirect_to login_path
-    end
-  end
+  before_action :authenticate_user!, only: [:new, :create]
 
   def new
     @book = Book.find(params[:book_id])
@@ -13,13 +8,14 @@ class ReviewsController < ApplicationController
 
   def create
     @book = Book.find(params[:book_id])
-    @review = @book.reviews.new(review_params)
-    @review.user = current_user
+    @review = current_user.reviews.new(review_params)
+    @review.book = @book
 
     if @review.save
-      redirect_to book_path(@book)
+      redirect_to book_path(@book), notice: "Review created successfully."
     else
-      render :new
+      flash.now[:alert] = @review.errors.full_messages.join(", ")
+      render :new, status: :unprocessable_entity
     end
   end
 

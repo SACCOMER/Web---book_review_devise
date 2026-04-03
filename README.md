@@ -114,7 +114,7 @@ Log in with an existing user account.
 **Request Body:**
 ```json
 {
-"email": "alice@example.com",
+"email": "test@example.com",
 "password": "123456"
 }
 ```

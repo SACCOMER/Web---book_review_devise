@@ -9,19 +9,18 @@
 </head>
 
 <body>
-
 <div class="navbar">
   <div class="nav-left">
     <%= link_to "Home", books_path %>
   </div>
 
   <div class="nav-right">
-    <% if current_user %>
+    <% if user_signed_in? %>
       <span class="nav-user">Hello, <%= current_user.username %></span>
-      <%= button_to "Logout", logout_path, method: :delete, class: "btn nav-btn" %>
+      <%= button_to "Logout", destroy_user_session_path, method: :delete, class: "btn nav-btn" %>
     <% else %>
-      <%= link_to "Login", login_path, class: "btn" %>
-      <%= link_to "Sign Up", signup_path, class: "btn" %>
+      <%= link_to "Login", new_user_session_path, class: "btn" %>
+      <%= link_to "Sign Up", new_user_registration_path, class: "btn" %>
     <% end %>
   </div>
 </div>

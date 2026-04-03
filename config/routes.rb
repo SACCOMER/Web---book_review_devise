@@ -1,18 +1,10 @@
 Rails.application.routes.draw do
   root "books#index"
+  devise_for :users
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
   resources :books do
     resources :reviews
   end
-
-  resources :users, only: [:new, :create]
-
-  get '/signup', to: 'users#new'
-  post '/signup', to: 'users#create'
-
-  get '/login', to: 'sessions#new'
-  post '/login', to: 'sessions#create'
-  delete '/logout', to: 'sessions#destroy'
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
   # Can be used by load balancers and uptime monitors to verify that the app is live.
@@ -24,4 +16,11 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "posts#index"
+  namespace :api do
+    post "signup", to: "auth#signup"
+    post "login", to: "auth#login"
+
+    resources :books, only: [:index, :show]
+    resources :categories, only: [:index]
+  end
 end
