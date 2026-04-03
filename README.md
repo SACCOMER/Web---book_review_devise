@@ -148,5 +148,5 @@ Return a list of all categories.
 
 The application is deployed on Heroku.
 
-Live URL: https://final-project-phase-1-4b87f7452e5b.herokuapp.com/
+Live URL: https://final-project-phase-2-7d48c3e1d552.herokuapp.com/
 
