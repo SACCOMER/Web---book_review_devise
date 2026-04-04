@@ -1,4 +1,6 @@
 class Api::AuthController < Api::ApplicationController
+  skip_before_action :authenticate_api_user!, only: [:signup, :login]
+
   def signup
     user = User.new(user_params)
 
@@ -8,7 +10,8 @@ class Api::AuthController < Api::ApplicationController
         user: {
           id: user.id,
           username: user.username,
-          email: user.email
+          email: user.email,
+          auth_token: user.auth_token
         }
       }, status: :created
     else
@@ -22,14 +25,17 @@ class Api::AuthController < Api::ApplicationController
     user = User.find_by(email: params[:email])
 
     if user && user.valid_password?(params[:password])
+      user.reset_auth_token!
+
       render json: {
         message: "Login successful",
         user: {
           id: user.id,
           username: user.username,
-          email: user.email
+          email: user.email,
+          auth_token: user.auth_token
         }
-      }
+      }, status: :ok
     else
       render json: { error: "Invalid email or password" }, status: :unauthorized
     end

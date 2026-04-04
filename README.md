@@ -54,7 +54,12 @@ The application implements multiple types of relationships:
     - Book & Category (through Categorization)
 ## ER Diagram
 
-![ER Diagram](app/assets/images/ER.png)
+![ER Diagram](app/assets/images/ER.drawio.png)
+
+## DB Diagram
+
+![DB Diagram](app/assets/images/DB.png)
+
 
 ---
 
@@ -87,6 +92,16 @@ The application includes realistic seed data:
 
 This project also includes a JSON-based API for user authentication and book data retrieval.
 
+### API Authentication
+
+Protected endpoints require an authentication token. After signing up or logging in, the API returns an `auth_token`.  
+This token must be included in the request header:
+Authorization: Bearer YOUR_AUTH_TOKEN
+Authentication required:
+- `GET /api/books`
+- `GET /api/books/:id`
+- `GET /api/categories`
+
 ### 1. User Signup
 
 **Endpoint:** `POST /api/signup`
@@ -97,8 +112,8 @@ Create a new user account.
 **Request Body:**
 ```json
 {
-  "username": "alice",
-  "email": "alice@example.com",
+  "username": "user",
+  "email": "user@example.com",
   "password": "123456",
   "password_confirmation": "123456"
 }
